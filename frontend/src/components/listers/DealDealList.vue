@@ -46,15 +46,17 @@
                             
                             
                             
+                            
                         </v-list-item-title>
 
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
-                            [ OfferId :  {{data.offerId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ DealId :  {{data.dealId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ PostId :  {{data.postId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ UserId :  {{data.userId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Status :  {{data.status }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ UpdateDt :  {{data.updateDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Price :  {{data.price }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ OfferId :  {{data.offerId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -122,12 +124,13 @@
             this.values = temp.data._embedded.deals;
             
             this.newValue = {
-                'offerId': 0,
+                'dealId': 0,
                 'postId': 0,
                 'userId': '',
                 'status': '',
                 'updateDt': '2024-09-24',
                 'price': 0,
+                'offerId': 0,
             }
         },
         methods: {

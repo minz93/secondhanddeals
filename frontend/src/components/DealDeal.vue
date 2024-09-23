@@ -16,12 +16,13 @@
         </v-card-title >        
 
         <v-card-text>
-            <Number v-if="editMode" label="OfferId" v-model="value.offerId" :editMode="editMode" :inputUI="''"/>
+            <Number v-if="editMode" label="DealId" v-model="value.dealId" :editMode="editMode" :inputUI="''"/>
             <Number label="PostId" v-model="value.postId" :editMode="editMode" :inputUI="''"/>
             <String label="UserId" v-model="value.userId" :editMode="editMode" :inputUI="''"/>
             <String label="Status" v-model="value.status" :editMode="editMode" :inputUI="''"/>
             <Date label="UpdateDt" v-model="value.updateDt" :editMode="editMode" :inputUI="''"/>
             <Number label="Price" v-model="value.price" :editMode="editMode" :inputUI="''"/>
+            <Number label="OfferId" v-model="value.offerId" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions>

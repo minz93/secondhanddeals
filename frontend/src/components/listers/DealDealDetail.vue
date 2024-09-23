@@ -6,7 +6,7 @@
 
         <v-card-text>
             <div>
-                <Number label="OfferId" v-model="item.offerId" :editMode="editMode" @change="change" />
+                <Number label="DealId" v-model="item.dealId" :editMode="editMode" @change="change" />
             </div>
             <div>
                 <Number label="PostId" v-model="item.postId" :editMode="editMode" @change="change" />
@@ -22,6 +22,9 @@
             </div>
             <div>
                 <Number label="Price" v-model="item.price" :editMode="editMode" @change="change" />
+            </div>
+            <div>
+                <Number label="OfferId" v-model="item.offerId" :editMode="editMode" @change="change" />
             </div>
         </v-card-text>
 

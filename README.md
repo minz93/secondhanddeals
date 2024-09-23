@@ -43,7 +43,7 @@ mvn spring-boot:run
 ```
 - deal
 ```
- http :8088/deals offerId="offerId" postId="postId" userId="userId" status="status" updateDt="updateDt" price="price" 
+ http :8088/deals dealId="dealId" postId="postId" userId="userId" status="status" updateDt="updateDt" price="price" offerId="offerId" 
 ```
 - mypage
 ```

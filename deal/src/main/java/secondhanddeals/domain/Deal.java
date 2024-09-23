@@ -19,7 +19,7 @@ public class Deal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long offerId;
+    private Long dealId;
 
     private Long postId;
 
@@ -30,6 +30,8 @@ public class Deal {
     private Date updateDt;
 
     private Integer price;
+
+    private Long offerId;
 
     @PostUpdate
     public void onPostUpdate() {
@@ -45,6 +47,9 @@ public class Deal {
         NegotiationCanceled negotiationCanceled = new NegotiationCanceled(this);
         negotiationCanceled.publishAfterCommit();
     }
+
+    @PrePersist
+    public void onPrePersist() {}
 
     @PreUpdate
     public void onPreUpdate() {}
