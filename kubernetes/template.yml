@@ -1,0 +1,228 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post
+  labels:
+    app: post
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post
+  template:
+    metadata:
+      labels:
+        app: post
+    spec:
+      containers:
+        - name: post
+          image: username/post:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: offer
+  labels:
+    app: offer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: offer
+  template:
+    metadata:
+      labels:
+        app: offer
+    spec:
+      containers:
+        - name: offer
+          image: username/offer:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deal
+  labels:
+    app: deal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deal
+  template:
+    metadata:
+      labels:
+        app: deal
+    spec:
+      containers:
+        - name: deal
+          image: username/deal:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mypage
+  labels:
+    app: mypage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mypage
+  template:
+    metadata:
+      labels:
+        app: mypage
+    spec:
+      containers:
+        - name: mypage
+          image: username/mypage:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: post
+  labels:
+    app: post
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: post
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: offer
+  labels:
+    app: offer
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: offer
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: deal
+  labels:
+    app: deal
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: deal
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mypage
+  labels:
+    app: mypage
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: mypage
+
