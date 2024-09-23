@@ -122,6 +122,8 @@ public class Offer {
             offer.setOfferStatus("dealEnded");
             repository().save(offer);
         });
+        
+        
     }
     //>>> Clean Arch / Port Method
 
