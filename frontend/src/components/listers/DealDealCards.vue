@@ -109,12 +109,13 @@
             me.values = temp.data._embedded.deals;
             
             me.newValue = {
-                'offerId': 0,
+                'dealId': 0,
                 'postId': 0,
                 'userId': '',
                 'status': '',
                 'updateDt': '2024-09-24',
                 'price': 0,
+                'offerId': 0,
             }
         },
         methods:{

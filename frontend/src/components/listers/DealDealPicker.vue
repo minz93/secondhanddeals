@@ -15,7 +15,7 @@
                             <v-list-item-title>
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                OfferId :  {{item.offerId }}
+                                DealId :  {{item.dealId }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 PostId :  {{item.postId }}
@@ -31,6 +31,9 @@
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 Price :  {{item.price }}
+                            </v-list-item-subtitle>
+                            <v-list-item-subtitle>
+                                OfferId :  {{item.offerId }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 
@@ -82,7 +85,9 @@
                 var obj = {}
                 if(val != undefined) {
                     var arr = this.list[val]._links.self.href.split('/');
-                    obj['offerId'] = arr[4]; 
+                    obj['dealId'] = arr[4]; 
+                    
+                    
                     
                     
                     

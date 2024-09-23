@@ -11,12 +11,13 @@ import secondhanddeals.infra.AbstractEvent;
 @ToString
 public class DealEnded extends AbstractEvent {
 
-    private Long offerId;
+    private Long dealId;
     private Long postId;
     private String userId;
     private String status;
     private Date updateDt;
     private Integer price;
+    private Long offerId;
 
     public DealEnded(Deal aggregate) {
         super(aggregate);

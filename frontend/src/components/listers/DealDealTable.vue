@@ -66,12 +66,13 @@
             values: [],
             headers: 
                 [
-                    { text: "offerId", value: "offerId" },
+                    { text: "dealId", value: "dealId" },
                     { text: "postId", value: "postId" },
                     { text: "userId", value: "userId" },
                     { text: "status", value: "status" },
                     { text: "updateDt", value: "updateDt" },
                     { text: "price", value: "price" },
+                    { text: "offerId", value: "offerId" },
                 ],
             deal : [],
             newValue: {},
@@ -89,12 +90,13 @@
             this.values = temp.data._embedded.deals;
 
             this.newValue = {
-                'offerId': 0,
+                'dealId': 0,
                 'postId': 0,
                 'userId': '',
                 'status': '',
                 'updateDt': '2024-09-24',
                 'price': 0,
+                'offerId': 0,
             }
         },
         methods: {
