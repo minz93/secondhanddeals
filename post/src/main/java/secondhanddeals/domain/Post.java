@@ -39,7 +39,7 @@ public class Post {
     @PrePersist
     public void prePersist(){
         if(this.status == null)
-            this.status = "Created";
+            this.status = "created";
     }
 
     @PostPersist
@@ -115,7 +115,7 @@ public class Post {
     //<<< Clean Arch / Port Method
     public static void updateStatus(DealCanceled dealCanceled) {
         repository().findById(Long.valueOf(dealCanceled.getPostId())).ifPresent(post->{
-            post.setStatus("Created");
+            post.setStatus("created");
             repository().save(post);
         });
     }

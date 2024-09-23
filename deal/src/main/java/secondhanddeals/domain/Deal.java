@@ -33,17 +33,19 @@ public class Deal {
 
     @PostUpdate
     public void onPostUpdate() {
-        DealReserved dealReserved = new DealReserved(this);
-        dealReserved.publishAfterCommit();
-
-        DealCanceled dealCanceled = new DealCanceled(this);
-        dealCanceled.publishAfterCommit();
-
-        DealEnded dealEnded = new DealEnded(this);
-        dealEnded.publishAfterCommit();
-
-        NegotiationCanceled negotiationCanceled = new NegotiationCanceled(this);
-        negotiationCanceled.publishAfterCommit();
+        if(this.status == "dealReserved") {
+            DealReserved dealReserved = new DealReserved(this);
+            dealReserved.publishAfterCommit();
+        } else if(this.status == "dealCanceled") {
+            DealCanceled dealCanceled = new DealCanceled(this);
+            dealCanceled.publishAfterCommit();
+        } else if(this.status == "dealEnded") {
+            DealEnded dealEnded = new DealEnded(this);
+            dealEnded.publishAfterCommit();
+        } else if(this.status == "negotiationCanceled") {
+            NegotiationCanceled negotiationCanceled = new NegotiationCanceled(this);
+            negotiationCanceled.publishAfterCommit();
+        }
     }
 
     @PreUpdate

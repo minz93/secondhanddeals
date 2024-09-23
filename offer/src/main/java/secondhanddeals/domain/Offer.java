@@ -34,23 +34,28 @@ public class Offer {
 
     @PostPersist
     public void onPostPersist() {
-        DealOffered dealOffered = new DealOffered(this);
-        dealOffered.publishAfterCommit();
-
-        PriceNegotiated priceNegotiated = new PriceNegotiated(this);
-        priceNegotiated.publishAfterCommit();
+        if(this.offerStatus == "dealOffered") {
+            DealOffered dealOffered = new DealOffered(this);
+            dealOffered.publishAfterCommit();
+        } else if(this.offerStatus == "priceNegotiated") {
+            PriceNegotiated priceNegotiated = new PriceNegotiated(this);
+            priceNegotiated.publishAfterCommit();
+        } 
     }
 
     @PostUpdate
     public void onPostUpdate() {
-        OfferAccepted offerAccepted = new OfferAccepted(this);
-        offerAccepted.publishAfterCommit();
-
+    
+        if(this.offerStatus == "offerAccepted") {
+            OfferAccepted offerAccepted = new OfferAccepted(this);
+            offerAccepted.publishAfterCommit();
+        } else if(this.offerStatus == "offerRefused") {
+            OfferRefused offerRefused = new OfferRefused(this);
+            offerRefused.publishAfterCommit();
+        }
         OfferStatusUpdated offerStatusUpdated = new OfferStatusUpdated(this);
         offerStatusUpdated.publishAfterCommit();
 
-        OfferRefused offerRefused = new OfferRefused(this);
-        offerRefused.publishAfterCommit();
     }
 
     @PreUpdate
