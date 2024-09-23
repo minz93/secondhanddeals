@@ -14,7 +14,6 @@ public class PostHided extends AbstractEvent {
     private Long postId;
     private String userId;
     private String status;
-    private Integer price;
     private Date updateDt;
 
     public PostHided(Post aggregate) {
