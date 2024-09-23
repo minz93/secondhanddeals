@@ -36,6 +36,12 @@ public class Post {
     private List<String> photos;
 
     private Date updateDt;
+    
+    @PrePersist
+    public void prePersist(){
+        if(this.status == null)
+            this.status = "Created";
+    }
 
     @PostPersist
     public void onPostPersist() {
@@ -101,87 +107,29 @@ public class Post {
 
     //<<< Clean Arch / Port Method
     public static void updateStatus(DealEnded dealEnded) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Post post = new Post();
-        repository().save(post);
-
-        StatusUpdated statusUpdated = new StatusUpdated(post);
-        statusUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(dealEnded.get???()).ifPresent(post->{
-            
-            post // do something
+        repository().findById(Long.valueOf(dealEnded.getPostId())).ifPresent(post->{
+            post.setStatus("dealEnded");
             repository().save(post);
-
-            StatusUpdated statusUpdated = new StatusUpdated(post);
-            statusUpdated.publishAfterCommit();
-
-         });
-        */
-
+        });
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void updateStatus(DealReserved dealReserved) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Post post = new Post();
-        repository().save(post);
-
-        StatusUpdated statusUpdated = new StatusUpdated(post);
-        statusUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(dealReserved.get???()).ifPresent(post->{
-            
-            post // do something
+        repository().findById(Long.valueOf(dealReserved.getPostId())).ifPresent(post->{
+            post.setStatus("dealReserved");
             repository().save(post);
-
-            StatusUpdated statusUpdated = new StatusUpdated(post);
-            statusUpdated.publishAfterCommit();
-
-         });
-        */
-
+        });
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void updateStatus(DealCanceled dealCanceled) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Post post = new Post();
-        repository().save(post);
-
-        StatusUpdated statusUpdated = new StatusUpdated(post);
-        statusUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(dealCanceled.get???()).ifPresent(post->{
-            
-            post // do something
+        repository().findById(Long.valueOf(dealCanceled.getPostId())).ifPresent(post->{
+            post.setStatus("Created");
             repository().save(post);
-
-            StatusUpdated statusUpdated = new StatusUpdated(post);
-            statusUpdated.publishAfterCommit();
-
-         });
-        */
-
+        });
     }
-    //>>> Clean Arch / Port Method
 
 }
 //>>> DDD / Aggregate Root
