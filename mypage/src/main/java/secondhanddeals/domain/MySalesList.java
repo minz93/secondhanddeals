@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class MySalesList {
 
         @Id
-        //@GeneratedValue(strategy=GenerationType.AUTO)
+        @GeneratedValue(strategy=GenerationType.AUTO)
         private String userId;
         private Long postId;
         private String status;
