@@ -8,7 +8,6 @@ import lombok.Data;
 import secondhanddeals.PostApplication;
 import secondhanddeals.domain.PostDeleted;
 import secondhanddeals.domain.PostEdited;
-import secondhanddeals.domain.PostHided;
 import secondhanddeals.domain.PostWrote;
 import secondhanddeals.domain.StatusUpdated;
 
@@ -41,9 +40,6 @@ public class Post {
     public void onPostPersist() {
         PostWrote postWrote = new PostWrote(this);
         postWrote.publishAfterCommit();
-
-        PostHided postHided = new PostHided(this);
-        postHided.publishAfterCommit();
     }
 
     @PostUpdate
@@ -90,13 +86,6 @@ public class Post {
 
         PostDeleted postDeleted = new PostDeleted(this);
         postDeleted.publishAfterCommit();
-    }
-
-    public void hidePost() {
-        //implement business logic here:
-
-        PostHided postHided = new PostHided(this);
-        postHided.publishAfterCommit();
     }
 
     //<<< Clean Arch / Port Method
