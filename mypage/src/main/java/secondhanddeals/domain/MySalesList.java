@@ -14,14 +14,14 @@ import java.time.LocalDate;
 public class MySalesList {
 
         @Id
-        //@GeneratedValue(strategy=GenerationType.AUTO)
+        @GeneratedValue(strategy=GenerationType.AUTO)
         private String userId;
         private Long postId;
         private String status;
         private Date createDt;
         private Date updateDt;
         private Integer price;
-        private List&lt;String&gt; photos;
+        private List<String> photos;
 
 
 }

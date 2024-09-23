@@ -90,57 +90,19 @@ public class Offer {
 
     //<<< Clean Arch / Port Method
     public static void updateOfferStatus(OfferAccepted offerAccepted) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Offer offer = new Offer();
-        repository().save(offer);
-
-        OfferStatusUpdated offerStatusUpdated = new OfferStatusUpdated(offer);
-        offerStatusUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(offerAccepted.get???()).ifPresent(offer->{
-            
-            offer // do something
+        repository().findById(Long.valueOf(offerAccepted.getOfferId())).ifPresent(offer->{
+            offer.setOfferStatus("offerAccepted");
             repository().save(offer);
-
-            OfferStatusUpdated offerStatusUpdated = new OfferStatusUpdated(offer);
-            offerStatusUpdated.publishAfterCommit();
-
-         });
-        */
-
+        });
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void updateOfferStatus(OfferRefused offerRefused) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Offer offer = new Offer();
-        repository().save(offer);
-
-        OfferStatusUpdated offerStatusUpdated = new OfferStatusUpdated(offer);
-        offerStatusUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(offerRefused.get???()).ifPresent(offer->{
-            
-            offer // do something
+        repository().findById(Long.valueOf(offerRefused.getOfferId())).ifPresent(offer->{
+            offer.setOfferStatus("offerRefused");
             repository().save(offer);
-
-            OfferStatusUpdated offerStatusUpdated = new OfferStatusUpdated(offer);
-            offerStatusUpdated.publishAfterCommit();
-
-         });
-        */
-
+        });
     }
 
     //>>> Clean Arch / Port Method
@@ -148,29 +110,10 @@ public class Offer {
     public static void updateOfferStatus(
         NegotiationCanceled negotiationCanceled
     ) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Offer offer = new Offer();
-        repository().save(offer);
-
-        OfferStatusUpdated offerStatusUpdated = new OfferStatusUpdated(offer);
-        offerStatusUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(negotiationCanceled.get???()).ifPresent(offer->{
-            
-            offer // do something
+        repository().findById(Long.valueOf(negotiationCanceled.getOfferId())).ifPresent(offer->{
+            offer.setOfferStatus("dealEnded");
             repository().save(offer);
-
-            OfferStatusUpdated offerStatusUpdated = new OfferStatusUpdated(offer);
-            offerStatusUpdated.publishAfterCommit();
-
-         });
-        */
-
+        });
     }
     //>>> Clean Arch / Port Method
 
