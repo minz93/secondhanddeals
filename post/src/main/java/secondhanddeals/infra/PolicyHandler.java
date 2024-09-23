@@ -68,19 +68,5 @@ public class PolicyHandler {
         // Sample Logic //
         Post.updateStatus(event);
     }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='PostHided'"
-    )
-    public void wheneverPostHided_UpdateStatus(@Payload PostHided postHided) {
-        PostHided event = postHided;
-        System.out.println(
-            "\n\n##### listener UpdateStatus : " + postHided + "\n\n"
-        );
-
-        // Sample Logic //
-        Post.updateStatus(event);
-    }
 }
 //>>> Clean Arch / Inbound Adaptor

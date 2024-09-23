@@ -8,7 +8,6 @@ import lombok.Data;
 import secondhanddeals.PostApplication;
 import secondhanddeals.domain.PostDeleted;
 import secondhanddeals.domain.PostEdited;
-import secondhanddeals.domain.PostHided;
 import secondhanddeals.domain.PostWrote;
 import secondhanddeals.domain.StatusUpdated;
 
@@ -47,9 +46,6 @@ public class Post {
     public void onPostUpdate() {
         PostEdited postEdited = new PostEdited(this);
         postEdited.publishAfterCommit();
-
-        PostHided postHided = new PostHided(this);
-        postHided.publishAfterCommit();
 
         StatusUpdated statusUpdated = new StatusUpdated(this);
         statusUpdated.publishAfterCommit();
@@ -90,13 +86,6 @@ public class Post {
 
         PostDeleted postDeleted = new PostDeleted(this);
         postDeleted.publishAfterCommit();
-    }
-
-    public void hidePost() {
-        //implement business logic here:
-
-        PostHided postHided = new PostHided(this);
-        postHided.publishAfterCommit();
     }
 
     //<<< Clean Arch / Port Method
@@ -170,34 +159,6 @@ public class Post {
         /** Example 2:  finding and process
         
         repository().findById(dealCanceled.get???()).ifPresent(post->{
-            
-            post // do something
-            repository().save(post);
-
-            StatusUpdated statusUpdated = new StatusUpdated(post);
-            statusUpdated.publishAfterCommit();
-
-         });
-        */
-
-    }
-
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
-    public static void updateStatus(PostHided postHided) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Post post = new Post();
-        repository().save(post);
-
-        StatusUpdated statusUpdated = new StatusUpdated(post);
-        statusUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(postHided.get???()).ifPresent(post->{
             
             post // do something
             repository().save(post);
