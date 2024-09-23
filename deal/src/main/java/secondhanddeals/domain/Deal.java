@@ -31,9 +31,6 @@ public class Deal {
 
     private Integer price;
 
-    @PostPersist
-    public void onPostPersist() {}
-
     @PostUpdate
     public void onPostUpdate() {
         DealReserved dealReserved = new DealReserved(this);
@@ -48,6 +45,9 @@ public class Deal {
         NegotiationCanceled negotiationCanceled = new NegotiationCanceled(this);
         negotiationCanceled.publishAfterCommit();
     }
+
+    @PreUpdate
+    public void onPreUpdate() {}
 
     public static DealRepository repository() {
         DealRepository dealRepository = DealApplication.applicationContext.getBean(

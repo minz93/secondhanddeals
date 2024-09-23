@@ -53,6 +53,9 @@ public class Offer {
         offerRefused.publishAfterCommit();
     }
 
+    @PreUpdate
+    public void onPreUpdate() {}
+
     public static OfferRepository repository() {
         OfferRepository offerRepository = OfferApplication.applicationContext.getBean(
             OfferRepository.class

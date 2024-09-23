@@ -55,6 +55,9 @@ public class Post {
         statusUpdated.publishAfterCommit();
     }
 
+    @PreUpdate
+    public void onPreUpdate() {}
+
     @PreRemove
     public void onPreRemove() {
         PostDeleted postDeleted = new PostDeleted(this);
