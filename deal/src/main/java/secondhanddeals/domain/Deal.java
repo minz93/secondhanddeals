@@ -47,7 +47,7 @@ public class Deal {
                 NegotiationCanceled negotiationCanceled = new NegotiationCanceled(offer);
                 negotiationCanceled.setOfferStatus("dealEnded");
                 negotiationCanceled.publishAfterCommit();
-            });
+            }); //여기 
             dealEnded.publishAfterCommit();
 
         } else if(this.status == "negotiationCanceled") {
