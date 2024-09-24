@@ -94,7 +94,7 @@
                 'postId': 0,
                 'userId': '',
                 'status': '',
-                'updateDt': '2024-09-24',
+                'updateDt': '2024-09-25',
                 'price': 0,
                 'offerId': 0,
             }
