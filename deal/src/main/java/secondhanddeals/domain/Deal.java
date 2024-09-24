@@ -87,33 +87,10 @@ public class Deal {
 
     //<<< Clean Arch / Port Method
     public static void reserveDeal(DealOffered dealOffered) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Deal deal = new Deal();
-        repository().save(deal);
-
-        DealReserved dealReserved = new DealReserved(deal);
-        dealReserved.publishAfterCommit();
-        DealEnded dealEnded = new DealEnded(deal);
-        dealEnded.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(dealOffered.get???()).ifPresent(deal->{
-            
-            deal // do something
+        repository().findById(Long.valueOf(dealOffered.getPostId())).ifPresent(deal->{
+            deal.setStatus("dealReserved");
             repository().save(deal);
-
-            DealReserved dealReserved = new DealReserved(deal);
-            dealReserved.publishAfterCommit();
-            DealEnded dealEnded = new DealEnded(deal);
-            dealEnded.publishAfterCommit();
-
-         });
-        */
-
+        });
     }
     //>>> Clean Arch / Port Method
 
