@@ -1,4 +1,4 @@
-![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
+![image](https://github.com/user-attachments/assets/7cd35039-2856-492e-a056-103abcb395f4)![image](https://github.com/user-attachments/assets/99f01350-da11-4373-b055-623411653ae5)![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
 # 주제 - 중고거래
 
 # Table of contents
@@ -215,6 +215,21 @@ siege -c20 -t40S -v http://post:8080/posts
 kubectl get po --namespace secondhanddeals -w
 kubectl get hpa --namespace secondhanddeals -w
 ```
-![image](https://github.com/user-attachments/assets/fa98a924-ee99-4b10-bb10-3d1dce74b955) ![image](https://github.com/user-attachments/assets/89cf9b18-7797-45b0-b529-9b97a50d6b4b)
+![image](https://github.com/user-attachments/assets/fa98a924-ee99-4b10-bb10-3d1dce74b955) ![image](https://github.com/user-attachments/a인
+```
+readinessProbe:
+  httpGet:
+    path: '/actuator/health'
+    port: 8080
+  initialDelaySeconds: 10
+  timeoutSeconds: 2
+  periodSeconds: 5
+  failureThreshold: 10
+```
+![image](https://github.com/user-attachments/assets/252abd11-b1ed-4d61-a5c5-e702fceb85e3)
 
+# 서비스 메쉬 응용 - Mesh
+
+
+# 통합 모니터링
 
