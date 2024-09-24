@@ -33,13 +33,18 @@ public class Deal {
 
     private Long offerId;
 
-    @PostUpdate
-    public void onPostUpdate() {
+    @PostPersist
+    public void onPostPersist() {
         System.out.println(this.status);
         if(this.status.equals("dealReserved")) {
             DealReserved dealReserved = new DealReserved(this);
             dealReserved.publishAfterCommit();
-        } else if(this.status.equals("dealCanceled")) {
+        }
+    }
+    
+    @PostUpdate
+    public void onPostUpdate() {
+        if(this.status.equals("dealCanceled")) {
             DealCanceled dealCanceled = new DealCanceled(this);
             dealCanceled.publishAfterCommit();
         } else if(this.status.equals("dealEnded")) {
