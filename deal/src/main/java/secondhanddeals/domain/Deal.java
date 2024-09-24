@@ -48,9 +48,6 @@ public class Deal {
         negotiationCanceled.publishAfterCommit();
     }
 
-    @PrePersist
-    public void onPrePersist() {}
-
     @PreUpdate
     public void onPreUpdate() {}
 
@@ -59,13 +56,6 @@ public class Deal {
             DealRepository.class
         );
         return dealRepository;
-    }
-
-    public void reserveDeal() {
-        //implement business logic here:
-
-        DealReserved dealReserved = new DealReserved(this);
-        dealReserved.publishAfterCommit();
     }
 
     public void cancelDeal() {
@@ -81,5 +71,38 @@ public class Deal {
         DealEnded dealEnded = new DealEnded(this);
         dealEnded.publishAfterCommit();
     }
+
+    //<<< Clean Arch / Port Method
+    public static void reserveDeal(DealOffered dealOffered) {
+        //implement business logic here:
+
+        /** Example 1:  new item 
+        Deal deal = new Deal();
+        repository().save(deal);
+
+        DealReserved dealReserved = new DealReserved(deal);
+        dealReserved.publishAfterCommit();
+        DealEnded dealEnded = new DealEnded(deal);
+        dealEnded.publishAfterCommit();
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(dealOffered.get???()).ifPresent(deal->{
+            
+            deal // do something
+            repository().save(deal);
+
+            DealReserved dealReserved = new DealReserved(deal);
+            dealReserved.publishAfterCommit();
+            DealEnded dealEnded = new DealEnded(deal);
+            dealEnded.publishAfterCommit();
+
+         });
+        */
+
+    }
+    //>>> Clean Arch / Port Method
+
 }
 //>>> DDD / Aggregate Root

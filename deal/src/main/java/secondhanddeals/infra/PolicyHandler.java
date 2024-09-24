@@ -22,5 +22,21 @@ public class PolicyHandler {
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='DealOffered'"
+    )
+    public void wheneverDealOffered_ReserveDeal(
+        @Payload DealOffered dealOffered
+    ) {
+        DealOffered event = dealOffered;
+        System.out.println(
+            "\n\n##### listener ReserveDeal : " + dealOffered + "\n\n"
+        );
+
+        // Sample Logic //
+        Deal.reserveDeal(event);
+    }
 }
 //>>> Clean Arch / Inbound Adaptor
