@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: post
-          image: mink93/post:20240924
+          image: user03.azurecr.io/post:latest
           ports:
             - containerPort: 8080
           resources:
