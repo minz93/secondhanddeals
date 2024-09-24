@@ -1,4 +1,4 @@
-![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
+![image](https://github.com/user-attachments/assets/38cf581d-492b-4633-84b2-ca69036b30d2)![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
 # 주제 - 중고거래
 
 # Table of contents
@@ -69,9 +69,52 @@ MSAEz 로 모델링한 이벤트스토밍 결과: https://www.msaez.io/#/1811885
 ### 중고거래 이벤트 스토밍
 ![image](https://github.com/minz93/secondhandtrading/blob/main/event-storming.png)
 1. post : 게시글 관리 기능
-2. purchase : 구매 관리 기능
-3. alarm : 알람 기능
-4. trade : 거래 관리 기능
-5. mypage : 판매 목록 조회 기능
+2. offer : 구매 요청 기능
+3. deal : 거래 기능
+4. mypage : 판매 목록 조회 기능
 
 # 분산 트랜잭션 - Saga
+1. post : 8082 port
+### post 서비스 게시글 등록
+```
+$ http localhost:8088/posts userId="seller01" createDt="2024-09-24" goods="아이폰13 공기계" price=600000 address="방배동"
+$ http localhost:8088/posts userId="seller02" createDt="2024-09-24" goods="무선마우스" price=10000 address="서초동"
+# kafka consumer
+{"eventType":"PostWrote","timestamp":1727139799825,"postId":1,"userId":"seller01","createDt":"2024-09-24T00:00:00.000+00:00","price":600000,"address":"방배동","photos":null,"status":"created","goods":"아이폰13 공기계"}
+{"eventType":"PostWrote","timestamp":1727139847721,"postId":2,"userId":"seller02","createDt":"2024-09-24T00:00:00.000+00:00","price":10000,"address":"서초동","photos":null,"status":"created","goods":"무선마우스"}
+```
+![image](https://github.com/user-attachments/assets/317825d4-d58a-437c-8ccf-534e7a93cd88) ![image](https://github.com/user-attachments/assets/546fb10b-2776-4785-b5b5-0928ee2c162b)
+
+2. offer : 8083 port
+### offer 서비스 구매 요청
+```
+$ http localhost:8088/offers userId="buyer01" price=10000 postId=2 offerType="dealOffered"
+$ http localhost:8088/offers userId="buyer02" price=600000 postId=1 offerType="priceNegotiated" offeredPrice=500000
+$ http localhost:8088/offers userId="buyer03" price=600000 postId=1 offerType="priceNegotiated" offeredPrice=510000
+```
+![image](https://github.com/user-attachments/assets/974997b6-1f76-4ceb-99a4-4f772e262c7f) ![image](https://github.com/user-attachments/assets/50dd4ce0-4fe3-487c-b941-7a20a4f89e5f) ![image](https://github.com/user-attachments/assets/5d3e559a-c3b1-453a-9675-5f7d8ddf9d05)
+
+### offer 서비스 가격제안 수락
+```
+$ http PATCH localhost:8088/offers/3 userId="buyer03" postId=1 offerStatus="offerAccepted" offeredPrice=510000
+```
+![image](https://github.com/user-attachments/assets/4073079a-a9d5-4823-9174-76fd8a819a9c)
+
+3. deal : 8084 port
+### deal 서비스 거래 예약
+```
+$ http localhost:8088/deals offerId=1 postId=2 userId="buyer01" price=10000 status="dealReserved" updateDt="2024-09-24"
+$ http localhost:8088/deals offerId=3 postId=1 userId="buyer03" price=510000 status="dealReserved" updateDt="2024-09-24"
+```
+![image](https://github.com/user-attachments/assets/3bf9e6be-85fc-4a8c-9be8-b2b80513d02c) ![image](https://github.com/user-attachments/assets/74a5b1ae-1d7c-4048-8f72-da310c9d2bec)
+
+### deal 서비스 거래 완료
+```
+$ http PATCH localhost:8088/deals/2 offeredId=3 postId=1 userId="buyer03" price=510000 status="dealEnded" updateDt="2024-09-25"
+```
+![image](https://github.com/user-attachments/assets/e3c42e8a-b12a-4401-a1b3-29e33d75b912)
+
+### deal 서비스 거래 완료에 따른 가격제안 자동 취소
+```
+
+```
