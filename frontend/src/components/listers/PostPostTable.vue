@@ -74,6 +74,7 @@
                     { text: "address", value: "address" },
                     { text: "photos", value: "photos" },
                     { text: "updateDt", value: "updateDt" },
+                    { text: "goods", value: "goods" },
                 ],
             post : [],
             newValue: {},
@@ -99,6 +100,7 @@
                 'address': '',
                 'photos': [],
                 'updateDt': '2024-09-24',
+                'goods': '',
             }
         },
         methods: {

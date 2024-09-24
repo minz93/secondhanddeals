@@ -117,6 +117,7 @@
                 'address': '',
                 'photos': [],
                 'updateDt': '2024-09-24',
+                'goods': '',
             }
         },
         methods:{

@@ -42,6 +42,8 @@ public class Post {
             this.status = "created";
     }
 
+    private String goods;
+
     @PostPersist
     public void onPostPersist() {
         PostWrote postWrote = new PostWrote(this);

@@ -48,6 +48,7 @@
                             
                             
                             
+                            
                         </v-list-item-title>
 
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
@@ -59,6 +60,7 @@
                             [ Address :  {{data.address }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Photos :  {{data.photos }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ UpdateDt :  {{data.updateDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ Goods :  {{data.goods }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -134,6 +136,7 @@
                 'address': '',
                 'photos': [],
                 'updateDt': '2024-09-24',
+                'goods': '',
             }
         },
         methods: {
