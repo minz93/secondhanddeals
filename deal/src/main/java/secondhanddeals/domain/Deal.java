@@ -41,7 +41,7 @@ public class Deal {
             dealReserved.publishAfterCommit();
         }
     }
-    
+
     @PostUpdate
     public void onPostUpdate() {
         if(this.status.equals("dealCanceled")) {
