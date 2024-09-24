@@ -1,16 +1,12 @@
-![image](https://github.com/user-attachments/assets/38cf581d-492b-4633-84b2-ca69036b30d2)![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
+![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
 # 주제 - 중고거래
 
 # Table of contents
 
 - [중고거래](#---)
   - [서비스 시나리오](#서비스-시나리오)
-  - [체크포인트](#체크포인트)
-  - [분석/설계](#분석설계)
   - [구현:](#구현-)
     - [DDD 의 적용](#ddd-의-적용)
-    - [폴리글랏 퍼시스턴스](#폴리글랏-퍼시스턴스)
-    - [폴리글랏 프로그래밍](#폴리글랏-프로그래밍)
     - [동기식 호출 과 Fallback 처리](#동기식-호출-과-Fallback-처리)
     - [비동기식 호출 과 Eventual Consistency](#비동기식-호출-과-Eventual-Consistency)
   - [운영](#운영)
@@ -18,31 +14,26 @@
     - [동기식 호출 / 서킷 브레이킹 / 장애격리](#동기식-호출-서킷-브레이킹-장애격리)
     - [오토스케일 아웃](#오토스케일-아웃)
     - [무정지 재배포](#무정지-재배포)
-  - [신규 개발 조직의 추가](#신규-개발-조직의-추가)
 
 # 서비스 시나리오
 
 기능적 요구사항
  - 핵심 기능
 1. 판매자가 판매글을 작성한다.
-2. 구매자가 물품을 구매하기 위해 판매자에게 메시지를 보낸다.
-3. 메시지를 수신하면 알람이 발생한다.
-4. 구매자가 거래를 희망하면 판매자는 게시글의 상태를 거래예정으로 변경한다.
-5. 거래가 취소된 경우 게시글의 상태를 거래가능 상태로 변경한다.
-6. 거래가 완료되면 게시글의 상태를 거래완료로 변경한다.
-7. 판매자는 판매글을 수정할 수 있다.
-8. 판매자는 판매글을 삭제할 수 있다.
-9. 판매자는 판매글 목록을 조회할 수 있다.
+2. 구매자가 거래 요청을 보낸다.
+3. 판매자는 게시글의 상태를 거래예정으로 변경한다.
+4. 거래가 취소된 경우 게시글의 상태를 거래가능 상태로 변경한다.
+5. 거래가 완료되면 게시글의 상태를 거래완료로 변경한다.
+6. 판매자는 판매글을 수정할 수 있다.
+7. 판매자는 판매글을 삭제할 수 있다.
+8. 판매자는 판매글 목록을 조회할 수 있다.
    
 
  - 서브 기능
-1. 구매자가 물품을 즐겨찾기에 등록한다.
-2. 구매자가 물품을 즐겨찾기에서 삭제한다.
-3. 구매자는 구매가격을 제안할 수 있다.
-4. 가격제안이 접수되면 판매자는 가격제안 알람을 받는다.
-6. 판매자는 제안된 가격을 보고 거래를 희망할 시 제안한 구매자에게 메시지를 보낸다.
-7. 거래가 완료되면 거래 후기를 작성한다.
-8. 구매자가 가격제안을 했으나 게시글이 거래완료 상태로 변경된 경우 제안은 자동 취소되어야한다.
+1. 구매자는 구매가격을 제안할 수 있다.
+2. 판매자는 제안된 가격을 수락할 수 있다.
+3. 판매자는 제안된 가격을 거절할 수 있다.
+4. 구매자가 가격제안을 했으나 게시글이 거래완료 상태로 변경된 경우 제안은 자동 취소되어야한다.
 
 
 
@@ -51,10 +42,8 @@
     1. 거래가 완료된 게시글은 거래가 불가능해야한다. Sync 호출 
 1. 장애격리
     1. 거래 기능이 수행되지 않더라도 게시글 기능은 365일 24시간 서비스될 수 있어야 한다.  Async (event-driven), Eventual Consistency
-    1. 결제시스템이 과중되면 사용자를 잠시동안 받지 않고 결제를 잠시후에 하도록 유도한다.  Circuit breaker, fallback
 1. 성능
     1. 판매자가 등록한 판매글을 판매게시글 목록(프론트엔드)에서 확인할 수 있어야한다. CQRS
-    1. 메시지가 수신될 때마다 알림이 발생해야한다.  Event driven
 
 
 # MSA 아키텍처 구성도
@@ -80,10 +69,11 @@ MSAEz 로 모델링한 이벤트스토밍 결과: https://www.msaez.io/#/1811885
 $ http localhost:8088/posts userId="seller01" createDt="2024-09-24" goods="아이폰13 공기계" price=600000 address="방배동"
 $ http localhost:8088/posts userId="seller02" createDt="2024-09-24" goods="무선마우스" price=10000 address="서초동"
 # kafka consumer
-{"eventType":"PostWrote","timestamp":1727139799825,"postId":1,"userId":"seller01","createDt":"2024-09-24T00:00:00.000+00:00","price":600000,"address":"방배동","photos":null,"status":"created","goods":"아이폰13 공기계"}
-{"eventType":"PostWrote","timestamp":1727139847721,"postId":2,"userId":"seller02","createDt":"2024-09-24T00:00:00.000+00:00","price":10000,"address":"서초동","photos":null,"status":"created","goods":"무선마우스"}
+{"eventType":"PostWrote","timestamp":1727196392362,"postId":1,"userId":"seller01","createDt":"2024-09-24T00:00:00.000+00:00","price":600000,"address":"방배동","status":"created","goods":"아이폰13 공기계"}
+{"eventType":"PostWrote","timestamp":1727196886754,"postId":2,"userId":"seller02","createDt":"2024-09-24T00:00:00.000+00:00","price":10000,"address":"서초동","status":"created","goods":"무선마우스"}
 ```
-![image](https://github.com/user-attachments/assets/317825d4-d58a-437c-8ccf-534e7a93cd88) ![image](https://github.com/user-attachments/assets/546fb10b-2776-4785-b5b5-0928ee2c162b)
+![image](https://github.com/user-attachments/assets/7d647999-0a0c-46f6-a362-22ca589f9c6c)
+![image](https://github.com/user-attachments/assets/e59e9870-5d6f-49f8-8dc4-86400efb59cd)
 
 2. offer : 8083 port
 ### offer 서비스 구매 요청
@@ -91,14 +81,22 @@ $ http localhost:8088/posts userId="seller02" createDt="2024-09-24" goods="무�
 $ http localhost:8088/offers userId="buyer01" price=10000 postId=2 offerType="dealOffered"
 $ http localhost:8088/offers userId="buyer02" price=600000 postId=1 offerType="priceNegotiated" offeredPrice=500000
 $ http localhost:8088/offers userId="buyer03" price=600000 postId=1 offerType="priceNegotiated" offeredPrice=510000
+# kafaka consumer
+{"eventType":"DealOffered","timestamp":1727196986188,"offerId":1,"userId":"buyer01","price":10000,"postId":2,"offerStatus":null,"offerType":"dealOffered"}
+{"eventType":"PriceNegotiated","timestamp":1727197030689,"offerId":2,"userId":"buyer02","price":600000,"offeredPrice":500000,"postId":1,"offerStatus":null,"offerType":"priceNegotiated"}
+{"eventType":"PriceNegotiated","timestamp":1727197056214,"offerId":3,"userId":"buyer03","price":600000,"offeredPrice":510000,"postId":1,"offerStatus":null,"offerType":"priceNegotiated"}
 ```
-![image](https://github.com/user-attachments/assets/974997b6-1f76-4ceb-99a4-4f772e262c7f) ![image](https://github.com/user-attachments/assets/50dd4ce0-4fe3-487c-b941-7a20a4f89e5f) ![image](https://github.com/user-attachments/assets/5d3e559a-c3b1-453a-9675-5f7d8ddf9d05)
+![image](https://github.com/user-attachments/assets/28ba30b3-f0fc-4a81-a463-a779beb21443)
+![image](https://github.com/user-attachments/assets/165ad7ad-51db-4c9d-a9a6-5d54d4caa858)
+![image](https://github.com/user-attachments/assets/0d33557d-843e-4ebe-8db1-da263a9dafb6)
 
 ### offer 서비스 가격제안 수락
 ```
 $ http PATCH localhost:8088/offers/3 userId="buyer03" postId=1 offerStatus="offerAccepted" offeredPrice=510000
+# kafka consumer
+{"eventType":"OfferStatusUpdated","timestamp":1727197151383,"offerId":3,"updateDt":null,"offerStatus":"offerAccepted"}
 ```
-![image](https://github.com/user-attachments/assets/4073079a-a9d5-4823-9174-76fd8a819a9c)
+![image](https://github.com/user-attachments/assets/74dbc957-67b6-48d1-ba48-50e0a568e7cc)
 
 3. deal : 8084 port
 ### deal 서비스 거래 예약
@@ -106,15 +104,116 @@ $ http PATCH localhost:8088/offers/3 userId="buyer03" postId=1 offerStatus="offe
 $ http localhost:8088/deals offerId=1 postId=2 userId="buyer01" price=10000 status="dealReserved" updateDt="2024-09-24"
 $ http localhost:8088/deals offerId=3 postId=1 userId="buyer03" price=510000 status="dealReserved" updateDt="2024-09-24"
 ```
-![image](https://github.com/user-attachments/assets/3bf9e6be-85fc-4a8c-9be8-b2b80513d02c) ![image](https://github.com/user-attachments/assets/74a5b1ae-1d7c-4048-8f72-da310c9d2bec)
+![image](https://github.com/user-attachments/assets/8b57b9cf-bfff-4a8d-aa2e-f281ad8ccbd9)
+![image](https://github.com/user-attachments/assets/52471bbd-2f4a-4e9f-a19c-0460f164bbe7)
 
 ### deal 서비스 거래 완료
+deal 서비스 거래 완료에 따른 가격제안 자동 완료
 ```
 $ http PATCH localhost:8088/deals/2 offeredId=3 postId=1 userId="buyer03" price=510000 status="dealEnded" updateDt="2024-09-25"
 ```
-![image](https://github.com/user-attachments/assets/e3c42e8a-b12a-4401-a1b3-29e33d75b912)
+![image](https://github.com/user-attachments/assets/e30b2483-6a6f-4436-a512-4ffb93a99bf0)
 
-### deal 서비스 거래 완료에 따른 가격제안 자동 취소
+
+# 보상처리 - Compensation
 ```
 
 ```
+
+# 단일 진입점 - Gateway
+gateway port : 8088
+ - gateway를 이용한 분산처리
+```
+# post 호출
+http localhost:8088/posts userId="seller01" createDt="2024-09-24" goods="아이폰13 공기계" price=600000 address="방배동"
+
+# offer 호출
+http localhost:8088/offers userId="buyer01" price=10000 postId=2 offerType="dealOffered"
+
+# deal 호출
+http localhost:8088/deals offerId=1 postId=2 userId="buyer01" price=10000 status="dealReserved" updateDt="2024-09-24"
+```
+
+# 분산 데이터 프로젝션 - CQRS
+## MyPage 서비스 확인
+```
+1. post 서비스 발생 시 myPage 조회
+http localhost:8088/posts userId="seller01" createDt="2024-09-24" goods="아이폰13 공기계" price=600000 address="방배동"
+http localhost:8085/myPages/1
+2. deal 서비스 발생 시 myPage 조회
+http localhost:8088/deals offerId=1 postId=2 userId="buyer01" price=10000 status="dealReserved" updateDt="2024-09-24"
+http localhost:8085/myPages/2
+```
+![image](https://github.com/user-attachments/assets/26804667-f712-4033-839d-d814506f1327)
+![image](https://github.com/user-attachments/assets/1698a1f2-0db0-4770-a57a-1471d71901a7)
+
+# 클라우드 배포 - Container 운영
+## Container 환경에 배포 : Docker 및 Azure ACR 활용
+1. gateway : LoadBalancer Type
+2. post
+3. offer
+4. deal
+5. mypage
+```
+mvn package -B -Dmaven.test.skip=true
+docker build -t mink93/post:20240924 .
+docker push mink93/post:20240924
+kubectl apply -f kubernetes/deployment.yaml --namespace secondhanddeals
+kubectl apply -f kubernetes/service.yaml --namespace secondhanddeals
+```
+![image](https://github.com/user-attachments/assets/4c7e25a6-eb95-40ab-8a92-f1f091a5981c)
+
+## Pipeline : Jenkins 활용
+
+
+# 컨테이너 자동확장 - HPA
+## post 서비스 Auto Scale-Out 적용
+1. post 서비스 배포
+2. seige 서비스 pod 생성
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: siege
+  namespace: secondhanddeals
+spec:
+  containers:
+  - name: siege
+    image: apexacme/siege-nginx
+EOF
+```
+
+3. Auto Scaling 설정
+```
+kubectl autoscale deployment post --namespace secondhanddeals --cpu-percent=50 --min=1 --max=3
+```
+
+4. deployment.yaml 배포파일에 CPU 요청에 대한 값을 지정
+```
+resources:
+  requests:
+    cpu: "200m"
+```
+
+5. deployment.yaml 재배포
+```
+kubectl delete -f kubernetes/deployment.yaml --namespace secondhanddeals
+kubectl apply -f kubernetes/deployment.yaml --namespace secondhanddeals
+```
+
+6. seige 부하 발생
+```
+kubectl exec -it siege --namespace secondhanddeals -- /bin/bash
+siege -c20 -t40S -v http://post:8080/posts
+```
+![image](https://github.com/user-attachments/assets/ec9a9937-dfeb-411a-bcbc-bb006900b226)
+
+7. post pod Auto Scale-Out 검증
+```
+kubectl get po --namespace secondhanddeals -w
+kubectl get hpa --namespace secondhanddeals -w
+```
+![image](https://github.com/user-attachments/assets/fa98a924-ee99-4b10-bb10-3d1dce74b955) ![image](https://github.com/user-attachments/assets/89cf9b18-7797-45b0-b529-9b97a50d6b4b)
+
+
