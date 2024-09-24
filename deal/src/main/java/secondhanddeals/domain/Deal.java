@@ -52,20 +52,12 @@ public class Deal {
                 negotiationCanceled.publishAfterCommit();
             });
 
-            System.out.println("그 다음");
-            Long strPostId = dealEnded.getPostId();
-            System.out.println(strPostId);
-
-            System.out.println(repository().findAllById(null));
-
-            System.out.println(repository().findById(strPostId));
-            //(Long.valueOf(strPostId)));
-            repository().findById(Long.valueOf(strPostId)).ifPresent(offer->{
-                System.out.println("진입!!!!");
-                NegotiationCanceled negotiationCanceled = new NegotiationCanceled(offer);
-                negotiationCanceled.setOfferId(dealEnded.getOfferId());
-                negotiationCanceled.publishAfterCommit();
-            });
+            // repository().findById(Long.valueOf(strPostId)).ifPresent(offer->{
+            //     System.out.println("진입!!!!");
+            //     NegotiationCanceled negotiationCanceled = new NegotiationCanceled(offer);
+            //     negotiationCanceled.setOfferId(dealEnded.getOfferId());
+            //     negotiationCanceled.publishAfterCommit();
+            // });
         }
     }
 
