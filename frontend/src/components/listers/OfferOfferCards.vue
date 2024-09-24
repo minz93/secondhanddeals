@@ -115,6 +115,7 @@
                 'offeredPrice': 0,
                 'postId': 0,
                 'offerStatus': '',
+                'offerType': '',
             }
         },
         methods:{

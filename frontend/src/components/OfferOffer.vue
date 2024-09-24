@@ -22,6 +22,7 @@
             <Number label="OfferedPrice" v-model="value.offeredPrice" :editMode="editMode" :inputUI="''"/>
             <Number label="PostId" v-model="value.postId" :editMode="editMode" :inputUI="''"/>
             <String label="OfferStatus" v-model="value.offerStatus" :editMode="editMode" :inputUI="''"/>
+            <String label="OfferType" v-model="value.offerType" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions>

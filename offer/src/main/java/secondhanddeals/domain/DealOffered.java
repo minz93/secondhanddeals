@@ -16,6 +16,7 @@ public class DealOffered extends AbstractEvent {
     private Integer price;
     private Long postId;
     private String offerStatus;
+    private String offerType;
 
     public DealOffered(Offer aggregate) {
         super(aggregate);

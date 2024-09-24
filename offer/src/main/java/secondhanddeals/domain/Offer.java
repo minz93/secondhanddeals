@@ -32,6 +32,8 @@ public class Offer {
 
     private String offerStatus;
 
+    private String offerType;
+
     @PostPersist
     public void onPostPersist() {
         DealOffered dealOffered = new DealOffered(this);
