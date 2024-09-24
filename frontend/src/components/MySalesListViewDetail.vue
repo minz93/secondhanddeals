@@ -7,9 +7,6 @@
 
         <v-card-text>
             <div>
-                <String label="UserId" v-model="item.userId" :editMode="editMode" @change="change" />
-            </div>
-            <div>
                 <Number label="PostId" v-model="item.postId" :editMode="editMode" @change="change" />
             </div>
             <div>
@@ -24,9 +21,11 @@
             <div>
                 <Number label="Price" v-model="item.price" :editMode="editMode" @change="change" />
             </div>
-            <StringList offline label="Photos" v-model="item.photos" :editMode="false" @change="change" />
             <div>
                 <String label="Goods" v-model="item.goods" :editMode="editMode" @change="change" />
+            </div>
+            <div>
+                <String label="UserId" v-model="item.userId" :editMode="editMode" @change="change" />
             </div>
         </v-card-text>
     </v-card>

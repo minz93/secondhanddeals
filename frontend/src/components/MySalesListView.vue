@@ -21,15 +21,14 @@
         },
         data: () => ({
             headers: [
-                { text: "userId", value: "userId" },
+                { text: "id", value: "id" },
                 { text: "postId", value: "postId" },
                 { text: "status", value: "status" },
                 { text: "createDt", value: "createDt" },
                 { text: "updateDt", value: "updateDt" },
                 { text: "price", value: "price" },
-                { text: "photos", value: "photos" },
                 { text: "goods", value: "goods" },
-                { text: "id", value: "id" },
+                { text: "userId", value: "userId" },
             ],
             mySalesList : [],
         }),

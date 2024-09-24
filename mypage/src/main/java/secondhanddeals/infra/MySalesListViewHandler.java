@@ -30,7 +30,6 @@ public class MySalesListViewHandler {
             mySalesList.setStatus(postWrote.getStatus());
             mySalesList.setCreateDt(postWrote.getCreateDt());
             mySalesList.setPrice(postWrote.getPrice());
-            mySalesList.setPhotos(postWrote.getPhotos());
             mySalesList.setGoods(postWrote.getGoods());
             // view 레파지 토리에 save
             mySalesListRepository.save(mySalesList);
@@ -52,7 +51,6 @@ public class MySalesListViewHandler {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
                 mySalesList.setUpdateDt(postEdited.getUpdateDt());
                 mySalesList.setPrice(postEdited.getPrice());
-                mySalesList.setPhotos(postEdited.getPhotos());
                 mySalesList.setGoods(postEdited.getGoods());
                 // view 레파지 토리에 save
                 mySalesListRepository.save(mySalesList);

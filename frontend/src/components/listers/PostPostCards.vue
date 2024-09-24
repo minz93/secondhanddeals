@@ -115,7 +115,6 @@
                 'createDt': '2024-09-24',
                 'price': 0,
                 'address': '',
-                'photos': [],
                 'updateDt': '2024-09-24',
                 'goods': '',
             }

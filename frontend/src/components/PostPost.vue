@@ -22,7 +22,6 @@
             <Date label="CreateDt" v-model="value.createDt" :editMode="editMode" :inputUI="''"/>
             <Number label="Price" v-model="value.price" :editMode="editMode" :inputUI="''"/>
             <String label="Address" v-model="value.address" :editMode="editMode" :inputUI="''"/>
-            <String label="Photos" v-model="value.photos" :editMode="editMode" :inputUI="''"/>
             <Date label="UpdateDt" v-model="value.updateDt" :editMode="editMode" :inputUI="''"/>
             <String label="Goods" v-model="value.goods" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
