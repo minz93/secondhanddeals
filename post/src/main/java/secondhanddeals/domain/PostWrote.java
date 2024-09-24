@@ -16,7 +16,7 @@ public class PostWrote extends AbstractEvent {
     private Date createDt;
     private Integer price;
     private String address;
-    private String photos;
+    private List<String> photos;
     private String status;
     private String goods;
 

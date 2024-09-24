@@ -13,8 +13,6 @@ import java.time.LocalDate;
 @Data
 public class MySalesList {
 
-        @Id
-        //@GeneratedValue(strategy=GenerationType.AUTO)
         private String userId;
         private Long postId;
         private String status;
@@ -23,6 +21,9 @@ public class MySalesList {
         private Integer price;
         private List&lt;String&gt; photos;
         private String goods;
+        @Id
+        //@GeneratedValue(strategy=GenerationType.AUTO)
+        private Long id;
 
 
 }
