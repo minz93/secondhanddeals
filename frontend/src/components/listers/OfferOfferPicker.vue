@@ -32,6 +32,9 @@
                             <v-list-item-subtitle>
                                 OfferStatus :  {{item.offerStatus }}
                             </v-list-item-subtitle>
+                            <v-list-item-subtitle>
+                                OfferType :  {{item.offerType }}
+                            </v-list-item-subtitle>
                         </v-list-item-content>
 
                         <v-list-item-action>
@@ -83,6 +86,8 @@
                 if(val != undefined) {
                     var arr = this.list[val]._links.self.href.split('/');
                     obj['offerId'] = arr[4]; 
+                    
+                    
                     
                     
                     

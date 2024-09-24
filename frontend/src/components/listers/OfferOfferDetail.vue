@@ -23,6 +23,9 @@
             <div>
                 <String label="OfferStatus" v-model="item.offerStatus" :editMode="editMode" @change="change" />
             </div>
+            <div>
+                <String label="OfferType" v-model="item.offerType" :editMode="editMode" @change="change" />
+            </div>
         </v-card-text>
 
         <v-card-actions>

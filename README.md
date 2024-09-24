@@ -39,7 +39,7 @@ mvn spring-boot:run
 ```
 - offer
 ```
- http :8088/offers offerId="offerId" userId="userId" price="price" offeredPrice="offeredPrice" postId="postId" offerStatus="offerStatus" 
+ http :8088/offers offerId="offerId" userId="userId" price="price" offeredPrice="offeredPrice" postId="postId" offerStatus="offerStatus" offerType="offerType" 
 ```
 - deal
 ```

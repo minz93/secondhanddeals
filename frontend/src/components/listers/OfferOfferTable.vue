@@ -72,6 +72,7 @@
                     { text: "offeredPrice", value: "offeredPrice" },
                     { text: "postId", value: "postId" },
                     { text: "offerStatus", value: "offerStatus" },
+                    { text: "offerType", value: "offerType" },
                 ],
             offer : [],
             newValue: {},
@@ -95,6 +96,7 @@
                 'offeredPrice': 0,
                 'postId': 0,
                 'offerStatus': '',
+                'offerType': '',
             }
         },
         methods: {

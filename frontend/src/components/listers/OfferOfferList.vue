@@ -46,6 +46,7 @@
                             
                             
                             
+                            
                         </v-list-item-title>
 
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
@@ -55,6 +56,7 @@
                             [ OfferedPrice :  {{data.offeredPrice }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ PostId :  {{data.postId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ OfferStatus :  {{data.offerStatus }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ OfferType :  {{data.offerType }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -128,6 +130,7 @@
                 'offeredPrice': 0,
                 'postId': 0,
                 'offerStatus': '',
+                'offerType': '',
             }
         },
         methods: {
