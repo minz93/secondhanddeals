@@ -36,10 +36,10 @@ public class Offer {
 
     @PostPersist
     public void onPostPersist() {
-        if(this.offerStatus == "dealOffered") {
+        if(this.offerType == "dealOffered") {
             DealOffered dealOffered = new DealOffered(this);
             dealOffered.publishAfterCommit();
-        } else if(this.offerStatus == "priceNegotiated") {
+        } else if(this.offerType == "priceNegotiated") {
             PriceNegotiated priceNegotiated = new PriceNegotiated(this);
             priceNegotiated.publishAfterCommit();
         } 
