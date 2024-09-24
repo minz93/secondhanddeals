@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/7cd35039-2856-492e-a056-103abcb395f4)![image](https://github.com/user-attachments/assets/99f01350-da11-4373-b055-623411653ae5)![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
+![image](https://github.com/user-attachments/assets/b0f6761e-f9f3-4b10-b1d1-229837f481bb)![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
 # 주제 - 중고거래
 
 # Table of contents
@@ -148,6 +148,7 @@ http localhost:8085/myPages/2
 ![image](https://github.com/user-attachments/assets/26804667-f712-4033-839d-d814506f1327)
 ![image](https://github.com/user-attachments/assets/1698a1f2-0db0-4770-a57a-1471d71901a7)
 
+
 # 클라우드 배포 - Container 운영
 ## Container 환경에 배포 : Docker 및 Azure ACR 활용
 1. gateway : LoadBalancer Type
@@ -215,7 +216,126 @@ siege -c20 -t40S -v http://post:8080/posts
 kubectl get po --namespace secondhanddeals -w
 kubectl get hpa --namespace secondhanddeals -w
 ```
-![image](https://github.com/user-attachments/assets/fa98a924-ee99-4b10-bb10-3d1dce74b955) ![image](https://github.com/user-attachments/a인
+![image](https://github.com/user-attachments/assets/fa98a924-ee99-4b10-bb10-3d1dce74b955)
+
+
+# 컨테이너로부터 환경분리 - ConfigMap
+
+## post 서비스 deployment.yaml 수정
+```
+env:
+  - name: ORDER_LOG_LEVEL
+    valueFrom:
+      configMapKeyRef:
+        name: config-dev
+        key: ORDER_LOG_LEVEL
+```
+
+## LOG LEVEL 설정 - DEBUG
+### ConfigMap 생성 - Logging Level을 DEBUG로 설정
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-dev
+  namespace: secondhanddeals
+data:
+  ORDER_DB_URL: jdbc:mysql://mysql:3306/connectdb1?serverTimezone=Asia/Seoul&useSSL=false
+  ORDER_DB_USER: myuser
+  ORDER_DB_PASS: mypass
+  ORDER_LOG_LEVEL: DEBUG
+EOF
+```
+
+### post 서비스 배포 후 Logging Level 확인
+```
+kubectl logs -l app=post --namespace secondhanddeals
+```
+![image](https://github.com/user-attachments/assets/df19beda-e5d4-48b1-84b1-80135716d724)
+
+## LOG LEVEL 설정 변경 - INFO
+### ConfigMap 변경 - Logging Level을 INFO로 설정
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-dev
+  namespace: secondhanddeals
+data:
+  ORDER_DB_URL: jdbc:mysql://mysql:3306/connectdb1?serverTimezone=Asia/Seoul&useSSL=false
+  ORDER_DB_USER: myuser
+  ORDER_DB_PASS: mypass
+  ORDER_LOG_LEVEL: INFO
+EOF
+```
+
+### post 서비스 배포 후 Logging Level 확인 : INFO LOG 확인됨
+```
+kubectl logs -l app=post --namespace secondhanddeals
+```
+![image](https://github.com/user-attachments/assets/11e1eec3-956b-4b3b-8e36-a42a3d51e3ce)
+
+## Configmap에서 각 Container로 전달된 환경정보 확인
+![image](https://github.com/user-attachments/assets/bad6ed2a-684e-4f73-8a80-2829914bf9b5)
+
+
+# 클라우드스토리지 활용 - PVC
+## PVC(Persistence Volume Claim) 생성
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azurefile
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: azurefile
+  resources:
+    requests:
+      storage: 1Gi
+EOF
+
+kubectl get pvc
+```
+![image](https://github.com/user-attachments/assets/ae9ba496-337c-423c-ae2b-6f1e7247fbab)
+
+## NFS 볼륨을 가지는 post 서비스 배포
+```
+volumes:
+- name: volume
+  persistentVolumeClaim:
+    claimName: azurefile
+```
+### 파일시스템 마운트 확인
+```
+kubectl exec -it pod/post-dcb8f68bb-lxp4w --namespace secondhanddeals -- /bin/sh
+cd /mnt/data
+echo "NFS Strorage Test.. " > test.txt
+```
+
+### post 서비스 replica 확장 후 두번째 서비스에서 test.txt 확인
+```
+kubectl scale deploy post --replicas=2 --namespace secondhanddeals
+kubectl exec -it pod/post-dcb8f68bb-zd96q --namespace secondhanddeals -- /bin/sh
+cd /mnt/data
+ls
+```
+![image](https://github.com/user-attachments/assets/29c0cb26-05c0-430e-83d3-ae8074ebddbb)
+
+
+# 무정지배포 - Rediness Probe
+post 서비스 배포 시 무정지배포 설정
+```
+siege -c1 -t60S -v http://post:8080/posts --delay=1S
+```
+
+### readinessProbe 설정 전
+![image](https://github.com/user-attachments/assets/7cd35039-2856-492e-a056-103abcb395f4)
+
+### readinessProbe 설정 후 
 ```
 readinessProbe:
   httpGet:
@@ -226,7 +346,9 @@ readinessProbe:
   periodSeconds: 5
   failureThreshold: 10
 ```
-![image](https://github.com/user-attachments/assets/252abd11-b1ed-4d61-a5c5-e702fceb85e3)
+![image](https://github.com/user-attachments/assets/99f01350-da11-4373-b055-623411653ae5)
+
+
 
 # 서비스 메쉬 응용 - Mesh
 
