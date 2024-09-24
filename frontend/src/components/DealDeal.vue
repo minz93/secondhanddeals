@@ -41,13 +41,6 @@
                     text
                     @click="save"
                 >
-                    ReserveDeal
-                </v-btn>
-                <v-btn
-                    color="primary"
-                    text
-                    @click="save"
-                >
                     CancelDeal
                 </v-btn>
                 <v-btn
