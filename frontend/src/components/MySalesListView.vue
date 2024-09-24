@@ -28,6 +28,7 @@
                 { text: "updateDt", value: "updateDt" },
                 { text: "price", value: "price" },
                 { text: "photos", value: "photos" },
+                { text: "goods", value: "goods" },
             ],
             mySalesList : [],
         }),

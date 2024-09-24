@@ -22,6 +22,7 @@ public class MySalesList {
         private Date updateDt;
         private Integer price;
         private List&lt;String&gt; photos;
+        private String goods;
 
 
 }

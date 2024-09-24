@@ -31,6 +31,7 @@ public class MySalesListViewHandler {
             mySalesList.setCreateDt(postWrote.getCreateDt());
             mySalesList.setPrice(postWrote.getPrice());
             mySalesList.setPhotos(postWrote.getPhotos());
+            mySalesList.setGoods(postWrote.getGoods());
             // view 레파지 토리에 save
             mySalesListRepository.save(mySalesList);
         } catch (Exception e) {
@@ -52,6 +53,7 @@ public class MySalesListViewHandler {
                 mySalesList.setUpdateDt(postEdited.getUpdateDt());
                 mySalesList.setPrice(postEdited.getPrice());
                 mySalesList.setPhotos(postEdited.getPhotos());
+                mySalesList.setGoods(postEdited.getGoods());
                 // view 레파지 토리에 save
                 mySalesListRepository.save(mySalesList);
             }
