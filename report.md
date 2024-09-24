@@ -56,7 +56,7 @@
 MSAEz 로 모델링한 이벤트스토밍 결과: https://www.msaez.io/#/181188513/storming/secondhandtrading
 
 ### 중고거래 이벤트 스토밍
-![image](https://github.com/minz93/secondhandtrading/blob/main/event-storming.png)
+![image](https://github.com/user-attachments/assets/c6431d33-93a2-424b-a80e-f44016932895)
 1. post : 게시글 관리 기능
 2. offer : 구매 요청 기능
 3. deal : 거래 기능
@@ -116,6 +116,7 @@ $ http PATCH localhost:8088/deals/2 offeredId=3 postId=1 userId="buyer03" price=
 
 
 # 보상처리 - Compensation
+## offer 서비스 거래요청 중 게시글이 거래완료 상태로 변경되어 거래요청 rollback
 ```
 
 ```
