@@ -3,7 +3,7 @@
 ## Model
 www.msaez.io/#/181188513/storming/secondhandtrading
 
-## Before Running Services
+## Before Running Services 
 ### Make sure there is a Kafka server running
 ```
 cd kafka
