@@ -112,10 +112,10 @@
                 'postId': 0,
                 'userId': '',
                 'status': '',
-                'createDt': '2024-09-24',
+                'createDt': '2024-09-25',
                 'price': 0,
                 'address': '',
-                'updateDt': '2024-09-24',
+                'updateDt': '2024-09-25',
                 'goods': '',
             }
         },
