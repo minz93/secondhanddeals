@@ -1,6 +1,6 @@
 # 
 
-## Model 
+## Model
 www.msaez.io/#/181188513/storming/secondhandtrading
 
 ## Before Running Services
