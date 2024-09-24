@@ -33,11 +33,14 @@ public class Deal {
 
     private Long offerId;
 
-    @PostUpdate
-    public void onPostUpdate() {
+    @PostPersist
+    public void onPostPersist() {
         DealReserved dealReserved = new DealReserved(this);
         dealReserved.publishAfterCommit();
+    }
 
+    @PostUpdate
+    public void onPostUpdate() {
         DealCanceled dealCanceled = new DealCanceled(this);
         dealCanceled.publishAfterCommit();
 
