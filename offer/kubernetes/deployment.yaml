@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: offer
-          image: "username/offer:latest"
+          image: "mink93/offer:20240924"
           ports:
             - containerPort: 8080
           readinessProbe:
