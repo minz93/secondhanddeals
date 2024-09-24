@@ -33,9 +33,6 @@
                                 Address :  {{item.address }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
-                                Photos :  {{item.photos }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle>
                                 UpdateDt :  {{item.updateDt }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
@@ -92,8 +89,6 @@
                 if(val != undefined) {
                     var arr = this.list[val]._links.self.href.split('/');
                     obj['postId'] = arr[4]; 
-                    
-                    
                     
                     
                     

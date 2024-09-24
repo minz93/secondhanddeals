@@ -48,7 +48,6 @@
                             
                             
                             
-                            
                         </v-list-item-title>
 
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
@@ -58,7 +57,6 @@
                             [ CreateDt :  {{data.createDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Price :  {{data.price }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Address :  {{data.address }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ Photos :  {{data.photos }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ UpdateDt :  {{data.updateDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Goods :  {{data.goods }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
@@ -134,7 +132,6 @@
                 'createDt': '2024-09-24',
                 'price': 0,
                 'address': '',
-                'photos': [],
                 'updateDt': '2024-09-24',
                 'goods': '',
             }

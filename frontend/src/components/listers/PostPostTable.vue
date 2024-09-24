@@ -72,7 +72,6 @@
                     { text: "createDt", value: "createDt" },
                     { text: "price", value: "price" },
                     { text: "address", value: "address" },
-                    { text: "photos", value: "photos" },
                     { text: "updateDt", value: "updateDt" },
                     { text: "goods", value: "goods" },
                 ],
@@ -98,7 +97,6 @@
                 'createDt': '2024-09-24',
                 'price': 0,
                 'address': '',
-                'photos': [],
                 'updateDt': '2024-09-24',
                 'goods': '',
             }

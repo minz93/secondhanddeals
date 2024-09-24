@@ -31,9 +31,6 @@ public class Post {
 
     private String address;
 
-    @ElementCollection
-    private List<String> photos;
-
     private Date updateDt;
     
     @PrePersist
