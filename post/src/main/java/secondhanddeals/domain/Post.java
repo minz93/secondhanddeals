@@ -36,6 +36,8 @@ public class Post {
 
     private Date updateDt;
 
+    private String goods;
+
     @PostPersist
     public void onPostPersist() {
         PostWrote postWrote = new PostWrote(this);

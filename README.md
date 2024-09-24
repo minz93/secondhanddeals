@@ -35,7 +35,7 @@ mvn spring-boot:run
 ## Test by API
 - post
 ```
- http :8088/posts postId="postId" userId="userId" status="status" createDt="createDt" price="price" address="address" photos="photos" updateDt="updateDt" 
+ http :8088/posts postId="postId" userId="userId" status="status" createDt="createDt" price="price" address="address" photos="photos" updateDt="updateDt" goods="goods" 
 ```
 - offer
 ```

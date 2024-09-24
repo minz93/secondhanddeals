@@ -18,6 +18,7 @@ public class PostWrote extends AbstractEvent {
     private String address;
     private String photos;
     private String status;
+    private String goods;
 
     public PostWrote(Post aggregate) {
         super(aggregate);

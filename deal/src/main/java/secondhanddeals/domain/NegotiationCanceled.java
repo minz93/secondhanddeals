@@ -16,6 +16,7 @@ public class NegotiationCanceled extends AbstractEvent {
     private String userId;
     private String status;
     private Date updateDt;
+    private Integer price;
     private Long offerId;
 
     public NegotiationCanceled(Deal aggregate) {
