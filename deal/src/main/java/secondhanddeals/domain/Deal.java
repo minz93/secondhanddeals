@@ -43,16 +43,13 @@ public class Deal {
             dealCanceled.publishAfterCommit();
         } else if(this.status == "dealEnded") {
             DealEnded dealEnded = new DealEnded(this);
-            repository().findById(Long.valueOf(dealEnded.getOfferId())).ifPresent(offer->{
-                NegotiationCanceled negotiationCanceled = new NegotiationCanceled(offer);
-                negotiationCanceled.setOfferStatus("dealEnded");
-                negotiationCanceled.publishAfterCommit();
-            }); //여기 
             dealEnded.publishAfterCommit();
 
-        } else if(this.status == "negotiationCanceled") {
-            NegotiationCanceled negotiationCanceled = new NegotiationCanceled(this);
-            negotiationCanceled.publishAfterCommit();
+            repository().findById(Long.valueOf(dealEnded.getOfferId())).ifPresent(deal->{
+                NegotiationCanceled negotiationCanceled = new NegotiationCanceled(deal);
+                negotiationCanceled.setOfferId(dealEnded.getOfferId());
+                negotiationCanceled.publishAfterCommit();
+            });
         }
     }
 
