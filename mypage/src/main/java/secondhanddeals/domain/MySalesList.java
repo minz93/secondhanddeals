@@ -15,6 +15,7 @@ public class MySalesList {
 
         @Id
         @GeneratedValue(strategy=GenerationType.AUTO)
+        private Long id;
         private String userId;
         private Long postId;
         private String status;
@@ -23,9 +24,6 @@ public class MySalesList {
         private Integer price;
         private List<String> photos;
         private String goods;
-        @Id
-        //@GeneratedValue(strategy=GenerationType.AUTO)
-        private Long id;
 
 
 }
