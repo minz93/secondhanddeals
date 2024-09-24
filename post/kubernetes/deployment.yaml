@@ -15,7 +15,7 @@ spec:
         app: post
     spec:
       containers:
-        - name: order
+        - name: post
           image: mink93/post:20240924
           ports:
             - containerPort: 8080
