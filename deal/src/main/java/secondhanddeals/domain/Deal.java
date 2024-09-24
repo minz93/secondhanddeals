@@ -35,18 +35,34 @@ public class Deal {
 
     @PostUpdate
     public void onPostUpdate() {
-        if(this.status == "dealReserved") {
+        System.out.println(this.status);
+        if(this.status.equals("dealReserved")) {
             DealReserved dealReserved = new DealReserved(this);
             dealReserved.publishAfterCommit();
-        } else if(this.status == "dealCanceled") {
+        } else if(this.status.equals("dealCanceled")) {
             DealCanceled dealCanceled = new DealCanceled(this);
             dealCanceled.publishAfterCommit();
-        } else if(this.status == "dealEnded") {
+        } else if(this.status.equals("dealEnded")) {
             DealEnded dealEnded = new DealEnded(this);
             dealEnded.publishAfterCommit();
-
-            repository().findById(Long.valueOf(dealEnded.getOfferId())).ifPresent(deal->{
+            
+            repository().findById(Long.valueOf(dealEnded.getDealId())).ifPresent(deal->{
                 NegotiationCanceled negotiationCanceled = new NegotiationCanceled(deal);
+                negotiationCanceled.setOfferId(dealEnded.getOfferId());
+                negotiationCanceled.publishAfterCommit();
+            });
+
+            System.out.println("그 다음");
+            Long strPostId = dealEnded.getPostId();
+            System.out.println(strPostId);
+
+            System.out.println(repository().findAllById(null));
+
+            System.out.println(repository().findById(strPostId));
+            //(Long.valueOf(strPostId)));
+            repository().findById(Long.valueOf(strPostId)).ifPresent(offer->{
+                System.out.println("진입!!!!");
+                NegotiationCanceled negotiationCanceled = new NegotiationCanceled(offer);
                 negotiationCanceled.setOfferId(dealEnded.getOfferId());
                 negotiationCanceled.publishAfterCommit();
             });

@@ -21,7 +21,7 @@ public class MySalesList {
         private Date createDt;
         private Date updateDt;
         private Integer price;
-        private List&lt;String&gt; photos;
+        private List<String> photos;
         private String goods;
 
 

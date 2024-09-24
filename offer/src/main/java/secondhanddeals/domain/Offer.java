@@ -36,10 +36,10 @@ public class Offer {
 
     @PostPersist
     public void onPostPersist() {
-        if(this.offerType == "dealOffered") {
+        if(this.offerType.equals("dealOffered")) {
             DealOffered dealOffered = new DealOffered(this);
             dealOffered.publishAfterCommit();
-        } else if(this.offerType == "priceNegotiated") {
+        } else if(this.offerType.equals("priceNegotiated")) {
             PriceNegotiated priceNegotiated = new PriceNegotiated(this);
             priceNegotiated.publishAfterCommit();
         } 
@@ -48,10 +48,10 @@ public class Offer {
     @PostUpdate
     public void onPostUpdate() {
     
-        if(this.offerStatus == "offerAccepted") {
+        if(this.offerStatus.equals("offerAccepted")) {
             OfferAccepted offerAccepted = new OfferAccepted(this);
             offerAccepted.publishAfterCommit();
-        } else if(this.offerStatus == "offerRefused") {
+        } else if(this.offerStatus.equals("offerRefused")) {
             OfferRefused offerRefused = new OfferRefused(this);
             offerRefused.publishAfterCommit();
         }

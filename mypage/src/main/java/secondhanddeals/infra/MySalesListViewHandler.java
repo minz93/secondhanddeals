@@ -26,7 +26,7 @@ public class MySalesListViewHandler {
             MySalesList mySalesList = new MySalesList();
             // view 객체에 이벤트의 Value 를 set 함
             mySalesList.setPostId(postWrote.getPostId());
-            mySalesList.setUserId(Long.valueOf(postWrote.getUserId()));
+            mySalesList.setUserId(postWrote.getUserId());
             mySalesList.setStatus(postWrote.getStatus());
             mySalesList.setCreateDt(postWrote.getCreateDt());
             mySalesList.setPrice(postWrote.getPrice());
