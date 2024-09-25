@@ -377,7 +377,7 @@ kubectl get namespace secondhanddeals --show-labels
 ```
 ![image](https://github.com/user-attachments/assets/2dfe75bb-1801-4b76-a0ff-568c95dfce42)
 
-* namespace Istio 리스트 조회 
+## namespace Istio 리스트 조회 
 ```
 kubectl get ns
 ```
