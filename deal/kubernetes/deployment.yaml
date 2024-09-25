@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: deal
-          image: "user03.azurecr.io/deal:latest"
+          image: user03.azurecr.io/deal:latest
           ports:
             - containerPort: 8080
           readinessProbe:

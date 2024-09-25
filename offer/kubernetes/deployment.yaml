@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: offer
-          image: "user03.azurecr.io/offer:latest"
+          image: user03.azurecr.io/offer:latest
           ports:
             - containerPort: 8080
           readinessProbe:
