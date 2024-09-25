@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/df4b279c-4ec8-4cbb-907d-774fe1062f81)![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
+![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
 # 주제 - 중고거래
 
 # Table of contents
