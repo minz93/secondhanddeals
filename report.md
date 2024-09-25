@@ -390,4 +390,18 @@ kubectl get ns
 
 
 # 통합 모니터링
+## gitpod에서 서비스 별 logging
+```
+kubectl logs pod/loki-stack-grafana-76c47f6d65-mjcpw -n logging
+```
+![image](https://github.com/user-attachments/assets/164efde9-eb38-44e6-a26e-69bcb7adc7f5)
 
+## Loggregation - Grafana
+```
+# mypage logging
+rate({app="mypage"}[$__auto])
+
+# microservice logging
+{app=~"deal|offer|post"}
+```
+![image](https://github.com/user-attachments/assets/8044f105-cea5-47ce-9c35-a29e378ea910)
