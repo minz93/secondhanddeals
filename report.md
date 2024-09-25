@@ -68,8 +68,7 @@ MSAEz 로 모델링한 이벤트스토밍 결과: https://www.msaez.io/#/1811885
 
 
 # 분산 트랜잭션 - Saga
-1. post : 8082 port
-### post 서비스 게시글 등록
+### 1. post 서비스 게시글 등록 : 8082 port
 ```
 $ http localhost:8088/posts userId="seller01" createDt="2024-09-24" goods="아이폰13 공기계" price=600000 address="방배동"
 $ http localhost:8088/posts userId="seller02" createDt="2024-09-24" goods="무선마우스" price=10000 address="서초동"
@@ -80,8 +79,8 @@ $ http localhost:8088/posts userId="seller02" createDt="2024-09-24" goods="무�
 ![image](https://github.com/user-attachments/assets/7d647999-0a0c-46f6-a362-22ca589f9c6c)
 ![image](https://github.com/user-attachments/assets/e59e9870-5d6f-49f8-8dc4-86400efb59cd)
 
-2. offer : 8083 port
-### offer 서비스 구매 요청
+
+### 2. offer 서비스 구매 요청 : 8083 port
 ```
 $ http localhost:8088/offers userId="buyer01" price=10000 postId=2 offerType="dealOffered"
 $ http localhost:8088/offers userId="buyer02" price=600000 postId=1 offerType="priceNegotiated" offeredPrice=500000
@@ -103,8 +102,8 @@ $ http PATCH localhost:8088/offers/3 userId="buyer03" postId=1 offerStatus="offe
 ```
 ![image](https://github.com/user-attachments/assets/74dbc957-67b6-48d1-ba48-50e0a568e7cc)
 
-3. deal : 8084 port
-### deal 서비스 거래 예약
+
+### 3. deal 서비스 거래 예약 : 8084 port
 ```
 $ http localhost:8088/deals offerId=1 postId=2 userId="buyer01" price=10000 status="dealReserved" updateDt="2024-09-24"
 $ http localhost:8088/deals offerId=3 postId=1 userId="buyer03" price=510000 status="dealReserved" updateDt="2024-09-24"
