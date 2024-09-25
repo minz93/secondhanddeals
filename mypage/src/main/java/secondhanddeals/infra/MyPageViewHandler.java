@@ -51,9 +51,9 @@ public class MyPageViewHandler {
             );
             for (MyPage myPage : myPageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                myPage.setStatus(dealReserved.getStatus());
                 myPage.setUpdateDt(dealReserved.getUpdateDt());
                 myPage.setPrice(dealReserved.getPrice());
+                myPage.setStatus("dealReserved");
                 // view 레파지 토리에 save
                 myPageRepository.save(myPage);
             }
@@ -75,8 +75,8 @@ public class MyPageViewHandler {
             );
             for (MyPage myPage : myPageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                myPage.setStatus(dealCanceled.getStatus());
                 myPage.setUpdateDt(dealCanceled.getUpdateDt());
+                myPage.setStatus("dealCanceled");
                 // view 레파지 토리에 save
                 myPageRepository.save(myPage);
             }
@@ -96,9 +96,9 @@ public class MyPageViewHandler {
             );
             for (MyPage myPage : myPageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                myPage.setStatus(dealEnded.getStatus());
                 myPage.setUpdateDt(dealEnded.getUpdateDt());
                 myPage.setPrice(dealEnded.getPrice());
+                myPage.setStatus("dealEnded");
                 // view 레파지 토리에 save
                 myPageRepository.save(myPage);
             }
