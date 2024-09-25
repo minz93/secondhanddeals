@@ -365,6 +365,28 @@ readinessProbe:
 
 
 # 서비스 메쉬 응용 - Mesh
+## Istio 환경의 Inject Sidecar
+클러스터에 설치된 Istio와 Service Mesh는 자동으로 사이드카를 pod 내에 injection하지 않음
+=> 지정된 Label을 가진 네임스페이스 상에서 동작하도록 설정
+```
+# label에 istio-injection 옵션 지정
+kubectl label namespace secondhanddeals istio-injection=enabled
+
+# label에 옵션지정 정보 조회
+kubectl get namespace secondhanddeals --show-labels
+```
+![image](https://github.com/user-attachments/assets/2dfe75bb-1801-4b76-a0ff-568c95dfce42)
+
+* namespace Istio 리스트 조회 
+```
+kubectl get ns
+```
+![image](https://github.com/user-attachments/assets/d6c4b512-fd79-4d66-b903-3ab5ee5352e3)
+
+
+## 마이크로서비스 pod injection
+![image](https://github.com/user-attachments/assets/ceef5823-ffe9-4066-af47-0f3ce978f043)
+
 
 
 # 통합 모니터링
