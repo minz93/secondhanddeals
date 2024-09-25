@@ -7,13 +7,15 @@
   - [서비스 시나리오](#서비스-시나리오)
   - [구현:](#구현-)
     - [Event Storming](#Event-Storming)
-    - [동기식 호출 과 Fallback 처리](#동기식-호출-과-Fallback-처리)
-    - [비동기식 호출 과 Eventual Consistency](#비동기식-호출-과-Eventual-Consistency)
+    - [분산 트랜잭션 - Saga](#분산-트랜잭션---Saga)
+    - [단일 진입점 - Gateway](#단일-진입점---Gateway)
+    - [분산 데이터 프로젝션 - CQRS](#분산-데이터-프로젝션---CQRS)
   - [운영](#운영)
-    - [CI/CD 설정](#cicd설정)
-    - [동기식 호출 / 서킷 브레이킹 / 장애격리](#동기식-호출-서킷-브레이킹-장애격리)
-    - [오토스케일 아웃](#오토스케일-아웃)
-    - [무정지 재배포](#무정지-재배포)
+    - [클라우드 배포 - Container 운영](#클라우드-배포---Container-운영)
+    - [컨테이너 자동확장 - HPA](#컨테이너-자동확장---HPA)
+    - [컨테이너로부터 환경분리 - ConfigMap](#컨테이너로부터-환경분리---ConfigMap)
+    - [클라우드스토리지 활용 - PVC](#클라우드스토리지-활용---PVC)
+    - [무정지배포 - Rediness Probe](#무정지배포---Rediness-Probe)
 
 # 서비스 시나리오
 
