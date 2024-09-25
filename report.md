@@ -46,13 +46,7 @@
     1. 판매자가 등록한 판매글을 판매게시글 목록(프론트엔드)에서 확인할 수 있어야한다. CQRS
 
 
-# MSA 아키텍처 구성도
-
-ㅇㅇㅇㅇ
-
-
 # Event Storming
-
 MSAEz 로 모델링한 이벤트스토밍 결과: https://www.msaez.io/#/181188513/storming/secondhandtrading
 
 ### 중고거래 이벤트 스토밍
@@ -62,6 +56,11 @@ MSAEz 로 모델링한 이벤트스토밍 결과: https://www.msaez.io/#/1811885
 2. offer : 구매 요청 기능
 3. deal : 거래 기능
 4. mypage : 판매 목록 조회 기능
+
+# MSA 아키텍처 구성도
+
+![image](https://github.com/user-attachments/assets/ab21658e-d862-4fe4-ad15-370dff73415b)
+
 
 # 분산 트랜잭션 - Saga
 1. post : 8082 port
