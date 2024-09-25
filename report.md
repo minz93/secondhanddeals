@@ -17,6 +17,8 @@
     - [컨테이너로부터 환경분리 - ConfigMap](#컨테이너로부터-환경분리---ConfigMap)
     - [클라우드스토리지 활용 - PVC](#클라우드스토리지-활용---PVC)
     - [무정지배포 - Rediness Probe](#무정지배포---Rediness-Probe)
+    - [서비스 메쉬 응용 - Mesh](#서비스-메쉬-응용---Mesh)
+    - [통합 모니터링](#통합-모니터링)
 
 # 서비스 시나리오
 
@@ -66,8 +68,7 @@ MSAEz 로 모델링한 이벤트스토밍 결과: https://www.msaez.io/#/1811885
 
 
 # 분산 트랜잭션 - Saga
-1. post : 8082 port
-### post 서비스 게시글 등록
+### 1. post 서비스 게시글 등록 : 8082 port
 ```
 $ http localhost:8088/posts userId="seller01" createDt="2024-09-24" goods="아이폰13 공기계" price=600000 address="방배동"
 $ http localhost:8088/posts userId="seller02" createDt="2024-09-24" goods="무선마우스" price=10000 address="서초동"
@@ -78,8 +79,8 @@ $ http localhost:8088/posts userId="seller02" createDt="2024-09-24" goods="무�
 ![image](https://github.com/user-attachments/assets/7d647999-0a0c-46f6-a362-22ca589f9c6c)
 ![image](https://github.com/user-attachments/assets/e59e9870-5d6f-49f8-8dc4-86400efb59cd)
 
-2. offer : 8083 port
-### offer 서비스 구매 요청
+
+### 2. offer 서비스 구매 요청 : 8083 port
 ```
 $ http localhost:8088/offers userId="buyer01" price=10000 postId=2 offerType="dealOffered"
 $ http localhost:8088/offers userId="buyer02" price=600000 postId=1 offerType="priceNegotiated" offeredPrice=500000
@@ -101,8 +102,8 @@ $ http PATCH localhost:8088/offers/3 userId="buyer03" postId=1 offerStatus="offe
 ```
 ![image](https://github.com/user-attachments/assets/74dbc957-67b6-48d1-ba48-50e0a568e7cc)
 
-3. deal : 8084 port
-### deal 서비스 거래 예약
+
+### 3. deal 서비스 거래 예약 : 8084 port
 ```
 $ http localhost:8088/deals offerId=1 postId=2 userId="buyer01" price=10000 status="dealReserved" updateDt="2024-09-24"
 $ http localhost:8088/deals offerId=3 postId=1 userId="buyer03" price=510000 status="dealReserved" updateDt="2024-09-24"
@@ -365,7 +366,43 @@ readinessProbe:
 
 
 # 서비스 메쉬 응용 - Mesh
+## Istio 환경의 Inject Sidecar
+클러스터에 설치된 Istio와 Service Mesh는 자동으로 사이드카를 pod 내에 injection하지 않음
+=> 지정된 Label을 가진 네임스페이스 상에서 동작하도록 설정
+```
+# label에 istio-injection 옵션 지정
+kubectl label namespace secondhanddeals istio-injection=enabled
+
+# label에 옵션지정 정보 조회
+kubectl get namespace secondhanddeals --show-labels
+```
+![image](https://github.com/user-attachments/assets/2dfe75bb-1801-4b76-a0ff-568c95dfce42)
+
+## namespace Istio 리스트 조회 
+```
+kubectl get ns
+```
+![image](https://github.com/user-attachments/assets/d6c4b512-fd79-4d66-b903-3ab5ee5352e3)
+
+
+## 마이크로서비스 pod injection
+![image](https://github.com/user-attachments/assets/ceef5823-ffe9-4066-af47-0f3ce978f043)
+
 
 
 # 통합 모니터링
+## gitpod에서 서비스 별 logging
+```
+kubectl logs pod/loki-stack-grafana-76c47f6d65-mjcpw -n logging
+```
+![image](https://github.com/user-attachments/assets/164efde9-eb38-44e6-a26e-69bcb7adc7f5)
 
+## Loggregation - Grafana
+```
+# mypage logging
+rate({app="mypage"}[$__auto])
+
+# microservice logging
+{app=~"deal|offer|post"}
+```
+![image](https://github.com/user-attachments/assets/8044f105-cea5-47ce-9c35-a29e378ea910)
