@@ -120,12 +120,18 @@ public class Offer {
     public static void updateOfferStatus(
         NegotiationCanceled negotiationCanceled
     ) {
-        repository().findById(Long.valueOf(negotiationCanceled.getOfferId())).ifPresent(offer->{
+        List<Offer> offers = repository().findByPostId(negotiationCanceled.getPostId());
+
+        for (Offer offer : offers) {
             offer.setOfferStatus("dealEnded");
-            repository().save(offer);
-        });
-        
-        
+        }
+
+        repository().saveAll(offers);
+
+        // repository().findById(Long.valueOf(negotiationCanceled.getOfferId())).ifPresent(offer->{
+        //     offer.setOfferStatus("dealEnded");
+        //     repository().save(offer);
+        // });
     }
     //>>> Clean Arch / Port Method
 
