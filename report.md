@@ -6,7 +6,7 @@
 - [중고거래](#---)
   - [서비스 시나리오](#서비스-시나리오)
   - [구현:](#구현-)
-    - [DDD 의 적용](#ddd-의-적용)
+    - [Event Storming](#Event-Storming)
     - [동기식 호출 과 Fallback 처리](#동기식-호출-과-Fallback-처리)
     - [비동기식 호출 과 Eventual Consistency](#비동기식-호출-과-Eventual-Consistency)
   - [운영](#운영)
@@ -45,7 +45,7 @@
 1. 성능
     1. 판매자가 등록한 판매글을 판매게시글 목록(프론트엔드)에서 확인할 수 있어야한다. CQRS
 
-
+# 구현
 # Event Storming
 MSAEz 로 모델링한 이벤트스토밍 결과: https://www.msaez.io/#/181188513/storming/secondhandtrading
 
@@ -149,6 +149,7 @@ http localhost:8085/myPages/2
 ![image](https://github.com/user-attachments/assets/1698a1f2-0db0-4770-a57a-1471d71901a7)
 
 
+# 운영
 # 클라우드 배포 - Container 운영
 ## Container 환경에 배포 : Docker 및 Azure ACR 활용
 1. gateway : LoadBalancer Type
