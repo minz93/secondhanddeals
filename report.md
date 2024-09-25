@@ -1,4 +1,4 @@
-![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
+![image](https://github.com/user-attachments/assets/df4b279c-4ec8-4cbb-907d-774fe1062f81)![image](https://github.com/minz93/secondhandtrading/blob/main/DaangnMarket_logo.png)
 # 주제 - 중고거래
 
 # Table of contents
@@ -168,7 +168,17 @@ kubectl apply -f kubernetes/service.yaml --namespace secondhanddeals
 ```
 ![image](https://github.com/user-attachments/assets/4c7e25a6-eb95-40ab-8a92-f1f091a5981c)
 
-## Pipeline : Jenkins 활용
+## Pipeline : Azure DevOps 활용
+### Post-CI
+
+![image](https://github.com/user-attachments/assets/867456a3-8be6-4aeb-a646-4f327e66c68d)
+![image](https://github.com/user-attachments/assets/c31fefd4-5298-4876-92db-3e2b14afbcad)
+=> ACR에 post repository 생성
+
+### Post-CD
+
+![image](https://github.com/user-attachments/assets/45a68a77-13cf-4c50-930e-818cb31bfd2f)
+
 
 
 # 컨테이너 자동확장 - HPA
