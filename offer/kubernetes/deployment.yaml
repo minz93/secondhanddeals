@@ -13,10 +13,11 @@ spec:
     metadata:
       labels:
         app: offer
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: offer
-          image: "mink93/offer:20240924"
+          image: "user03.azurecr.io/offer:latest"
           ports:
             - containerPort: 8080
           readinessProbe:

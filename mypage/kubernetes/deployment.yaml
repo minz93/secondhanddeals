@@ -13,10 +13,11 @@ spec:
     metadata:
       labels:
         app: mypage
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: mypage
-          image: "mink93/mypage:20240924"
+          image: "user03.azurecr.io/mypage:latest"
           ports:
             - containerPort: 8080
           readinessProbe:

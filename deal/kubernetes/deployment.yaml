@@ -13,10 +13,11 @@ spec:
     metadata:
       labels:
         app: deal
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: deal
-          image: "mink93/deal:20240924"
+          image: "user03.azurecr.io/deal:latest"
           ports:
             - containerPort: 8080
           readinessProbe:

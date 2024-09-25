@@ -13,9 +13,10 @@ spec:
     metadata:
       labels:
         app: gateway
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: gateway
-          image: mink93/gateway:20240924
+          image: user03.azurecr.io/gateway:latest
           ports:
             - containerPort: 8080
